@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<title>媛媛的天气预报系统</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>媛媛的天气预报系统</h1>
+			<div class="col-2 offset-md-2">
+				<select class="custom-select" id="selectCityId">
+					<option th:each="city : ${reportModel.cityList}"
+						th:value="${city.cityName}" th:text="${city.cityName}"
+						th:selected="${city.cityName eq reportModel.cityName}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<h1 th:text="${reportModel.cityName}"></h1>
+		</div>
+		<div class="row">
+			<p>
+				湿度：<span th:text="${reportModel.report.shidu}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				温度：<span th:text="${reportModel.report.wendu}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				空气质量：<span th:text="${reportModel.report.quality}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				PM10：<span th:text="${reportModel.report.pm10}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				PM25：<span th:text="${reportModel.report.pm25}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<p>
+				温馨提示：<span th:text="${reportModel.report.ganmao}"></span>
+			</p>
+		</div>
+		<div class="row">
+			<div class="card card-body col-sm-2.4" 
+				th:each="forecast : ${reportModel.report.forecast}">
+				<div class="border-info text-info">
+					<p class="card-text " th:text="${forecast.date}">日期</p>
+					<p class="card-text" th:text="${forecast.high}">最高温度</p>
+					<p class="card-text" th:text="${forecast.low}">最低温度</p>
+					<p class="card-text" th:text="${forecast.sunrise}">日出时间</p>
+					<p class="card-text" th:text="${forecast.sunset}">日落时间</p>
+					<p class="card-text" th:text="${forecast.aqi}">风向</p>
+					<p class="card-text" th:text="${forecast.type}">类型</p>
+					<p class="card-text" th:text="${forecast.notice}">注意事项</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" th:src="@{/js/weather/report.js}"></script>
+</body>
+</html>
